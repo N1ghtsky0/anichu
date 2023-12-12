@@ -9,3 +9,7 @@
 <p>총 {{anime.episodes}}화</p>
 <p>방영일: {{anime.firstBroadcastDate}}</p>
 <p>제작사: <a href="/company/{{anime.companySeq}}">{{anime.companyName}}</a></p>
+
+{{#commentList}}
+  <p>{{content}} ({{score}})</p>
+{{/commentList}}
