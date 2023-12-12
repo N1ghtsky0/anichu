@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.anichu.anichu.repository.mapper.CommentMapper">
+
+    <select id="selectAnimeAvgScore" resultType="io.anichu.anichu.dto.response.AnimeAvgScoreDTO">
+        select
+            ifnull(avg(score), 0) as score,
+            count(seq) as cnt
+        from comment
+        where anime_seq = #{seq}
+          and deleted = false
+    </select>
+
+</mapper>

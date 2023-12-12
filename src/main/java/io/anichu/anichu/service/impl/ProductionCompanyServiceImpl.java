@@ -7,6 +7,7 @@ import io.anichu.anichu.repository.ProductionCompanyRepo;
 import io.anichu.anichu.service.ProductionCompanyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,11 +22,13 @@ public class ProductionCompanyServiceImpl implements ProductionCompanyService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public GetCompanyResponseDTO getProductionCompany(Long seq) {
         return GetCompanyResponseDTO.from(productionCompanyRepo.findById(seq).orElseThrow());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<GetCompanyResponseDTO> getAllProductionCompany() {
         return productionCompanyRepo.findAll().stream()
                 .map(GetCompanyResponseDTO::from)

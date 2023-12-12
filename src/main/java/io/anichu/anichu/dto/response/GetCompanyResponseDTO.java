@@ -1,11 +1,9 @@
 package io.anichu.anichu.dto.response;
 
 import io.anichu.anichu.entity.ProductionCompany;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 @Builder
-@AllArgsConstructor
 public class GetCompanyResponseDTO {
     private Long seq;
     private String name;

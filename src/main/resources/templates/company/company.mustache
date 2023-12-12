@@ -1,0 +1,24 @@
+<h1>제작사 상세 페이지</h1>
+
+<h2>{{company.name}}</h2>
+
+<h3>작품 리스트</h3>
+<table>
+  <tr>
+    <th scope="col">번호</th>
+    <th scope="col">작품명</th>
+    <th scope="col">평점(참여자 수)</th>
+  </tr>
+  {{#animeCards}}
+    <tr>
+      <td>{{seq}}</td>
+      <td><a href="/anime/{{seq}}">{{name}}</a></td>
+      <td>{{score}}({{commentCnt}})</td>
+    </tr>
+  {{/animeCards}}
+  {{^animeCards}}
+    <tr>
+      <td colspan="3">no content</td>
+    </tr>
+  {{/animeCards}}
+</table>
