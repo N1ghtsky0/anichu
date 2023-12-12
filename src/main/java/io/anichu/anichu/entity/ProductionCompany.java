@@ -1,10 +1,15 @@
 package io.anichu.anichu.entity;
 
+import io.anichu.anichu.dto.request.InsertCompanyRequestDTO;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class ProductionCompany {
@@ -16,4 +21,9 @@ public class ProductionCompany {
     @Column(nullable = false)
     private String name;
 
+    public static ProductionCompany from(InsertCompanyRequestDTO requestDTO) {
+        return ProductionCompany.builder()
+                .name(requestDTO.getName())
+                .build();
+    }
 }

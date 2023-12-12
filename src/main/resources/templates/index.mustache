@@ -1,0 +1,19 @@
+<h1>애니추</h1>
+
+<table>
+  <tr>
+    <th scope="col">번호</th>
+    <th scope="col">회사명</th>
+  </tr>
+  {{#companyList}}
+    <tr>
+      <td>{{seq}}</td>
+      <td><a href="/company/{{seq}}">{{name}}</a></td>
+    </tr>
+  {{/companyList}}
+  {{^companyList}}
+    <tr>
+      <td colspan="2">no content</td>
+    </tr>
+  {{/companyList}}
+</table>
