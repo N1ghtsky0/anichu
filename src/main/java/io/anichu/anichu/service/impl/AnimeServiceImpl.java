@@ -1,5 +1,6 @@
 package io.anichu.anichu.service.impl;
 
+import io.anichu.anichu.dto.response.GetAnimeResponseDTO;
 import io.anichu.anichu.dto.response.GetAnimeSummaryResponseDTO;
 import io.anichu.anichu.repository.AnimeRepo;
 import io.anichu.anichu.repository.ProductionCompanyRepo;
@@ -25,8 +26,14 @@ public class AnimeServiceImpl implements AnimeService {
         List<GetAnimeSummaryResponseDTO> responseDTO = new ArrayList<>();
 
         animeRepo.findAllByCompany(productionCompanyRepo.findById(seq).orElseThrow())
-                .forEach(anime -> responseDTO.add(GetAnimeSummaryResponseDTO.from(anime, commentService.getAnimeAverageScore(anime))));
+                .forEach(anime -> responseDTO.add(GetAnimeSummaryResponseDTO.from(anime, commentService.getAnimeAverageScore(anime.getSeq()))));
 
         return responseDTO;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public GetAnimeResponseDTO getAnime(Long seq) {
+        return GetAnimeResponseDTO.from(animeRepo.findById(seq).orElseThrow());
     }
 }
