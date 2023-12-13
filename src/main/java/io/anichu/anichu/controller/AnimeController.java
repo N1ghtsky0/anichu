@@ -2,12 +2,14 @@ package io.anichu.anichu.controller;
 
 import io.anichu.anichu.service.AnimeService;
 import io.anichu.anichu.service.CommentService;
+import io.anichu.anichu.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @RequestMapping("/anime")
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AnimeController {
     private final AnimeService animeService;
     private final CommentService commentService;
+    private final TagService tagService;
 
     @GetMapping()
     public String animeListPage(Model model) {
@@ -31,5 +34,13 @@ public class AnimeController {
         model.addAttribute("commentList", commentService.getComments(seq));
 
         return "anime/detail";
+    }
+
+    @GetMapping("/tag")
+    public String tagSearch(@RequestParam("name") String tags,
+                            Model model) {
+        model.addAttribute("animeCardList", tagService.getAllAnimeByTag(tags.split(",")));
+
+        return "anime/list";
     }
 }
