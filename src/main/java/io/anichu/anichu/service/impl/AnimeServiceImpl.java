@@ -2,6 +2,7 @@ package io.anichu.anichu.service.impl;
 
 import io.anichu.anichu.dto.response.GetAnimeResponseDTO;
 import io.anichu.anichu.dto.response.GetAnimeSummaryResponseDTO;
+import io.anichu.anichu.entity.Anime;
 import io.anichu.anichu.repository.AnimeRepo;
 import io.anichu.anichu.repository.ProductionCompanyRepo;
 import io.anichu.anichu.service.AnimeService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -29,6 +31,15 @@ public class AnimeServiceImpl implements AnimeService {
                 .forEach(anime -> responseDTO.add(GetAnimeSummaryResponseDTO.from(anime, commentService.getAnimeAverageScore(anime.getSeq()))));
 
         return responseDTO;
+    }
+
+    @Override
+    public List<GetAnimeSummaryResponseDTO> getAllAnimeSummaryCard() {
+        return animeRepo.findAll().stream()
+                .sorted(Comparator.comparing(Anime::getFirstBroadcastDate).reversed())
+                .limit(10)
+                .map(anime -> GetAnimeSummaryResponseDTO.from(anime, commentService.getAnimeAverageScore(anime.getSeq())))
+                .toList();
     }
 
     @Override

@@ -9,6 +9,7 @@ public class GetAnimeSummaryResponseDTO {
     private String name;
     private String score;
     private Integer commentCnt;
+    private String companyName;
 
     public static GetAnimeSummaryResponseDTO from(Anime anime, AnimeAvgScoreDTO dto) {
         return GetAnimeSummaryResponseDTO.builder()
@@ -16,6 +17,7 @@ public class GetAnimeSummaryResponseDTO {
                 .name(anime.getTitle())
                 .score(String.format("%.1f", dto.getScore()))
                 .commentCnt(dto.getCnt())
+                .companyName(anime.getCompany().getName())
                 .build();
     }
 }

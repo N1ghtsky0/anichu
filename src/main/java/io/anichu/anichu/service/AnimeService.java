@@ -8,5 +8,7 @@ import java.util.List;
 public interface AnimeService {
     List<GetAnimeSummaryResponseDTO> getAllAnimeSummaryCardByCompany(Long seq);
 
+    List<GetAnimeSummaryResponseDTO> getAllAnimeSummaryCard();
+
     GetAnimeResponseDTO getAnime(Long seq);
 }
