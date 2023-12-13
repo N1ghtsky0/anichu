@@ -16,6 +16,13 @@ public class AnimeController {
     private final AnimeService animeService;
     private final CommentService commentService;
 
+    @GetMapping()
+    public String animeListPage(Model model) {
+        model.addAttribute("animeCardList", animeService.getAllAnimeSummaryCard());
+
+        return "anime/list";
+    }
+
     @GetMapping("/{seq}")
     public String animeMainPage(@PathVariable("seq") Long seq,
                                 Model model) {

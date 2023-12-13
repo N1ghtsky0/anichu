@@ -37,7 +37,6 @@ public class AnimeServiceImpl implements AnimeService {
     public List<GetAnimeSummaryResponseDTO> getAllAnimeSummaryCard() {
         return animeRepo.findAll().stream()
                 .sorted(Comparator.comparing(Anime::getFirstBroadcastDate).reversed())
-                .limit(10)
                 .map(anime -> GetAnimeSummaryResponseDTO.from(anime, commentService.getAnimeAverageScore(anime.getSeq())))
                 .toList();
     }

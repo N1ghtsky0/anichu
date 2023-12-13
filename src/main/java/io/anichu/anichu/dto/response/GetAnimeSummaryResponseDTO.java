@@ -2,8 +2,10 @@ package io.anichu.anichu.dto.response;
 
 import io.anichu.anichu.entity.Anime;
 import lombok.Builder;
+import lombok.Getter;
 
 @Builder
+@Getter
 public class GetAnimeSummaryResponseDTO {
     private Long seq;
     private String name;
