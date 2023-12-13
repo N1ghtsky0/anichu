@@ -23,6 +23,6 @@ public class AnimeController {
         model.addAttribute("score", commentService.getAnimeAverageScore(seq));
         model.addAttribute("commentList", commentService.getComments(seq));
 
-        return "anime/anime";
+        return "anime/detail";
     }
 }

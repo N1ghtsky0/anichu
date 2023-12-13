@@ -22,6 +22,6 @@ public class ProductionCompanyController {
         model.addAttribute("company", productionCompanyService.getProductionCompany(seq));
         model.addAttribute("animeCards", animeService.getAllAnimeSummaryCardByCompany(seq));
 
-        return "company/company";
+        return "company/detail";
     }
 }
