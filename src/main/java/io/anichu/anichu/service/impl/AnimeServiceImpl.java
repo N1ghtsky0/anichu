@@ -42,6 +42,15 @@ public class AnimeServiceImpl implements AnimeService {
     }
 
     @Override
+    public List<GetAnimeSummaryResponseDTO> getRecommendAnimeSummaryCards() {
+        return animeRepo.findAll().stream()
+                .map(anime -> GetAnimeSummaryResponseDTO.from(anime, commentService.getAnimeAverageScore(anime.getSeq())))
+                .sorted(Comparator.comparing(GetAnimeSummaryResponseDTO::getScore).reversed())
+                .limit(10)
+                .toList();
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public GetAnimeResponseDTO getAnime(Long seq) {
         return GetAnimeResponseDTO.from(animeRepo.findById(seq).orElseThrow());

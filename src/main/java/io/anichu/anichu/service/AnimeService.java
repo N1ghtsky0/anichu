@@ -10,5 +10,7 @@ public interface AnimeService {
 
     List<GetAnimeSummaryResponseDTO> getAllAnimeSummaryCard();
 
+    List<GetAnimeSummaryResponseDTO> getRecommendAnimeSummaryCards();
+
     GetAnimeResponseDTO getAnime(Long seq);
 }

@@ -16,7 +16,7 @@ public class IndexController {
     @GetMapping("/")
     public String indexPage(Model model) {
         model.addAttribute("companyList", productionCompanyService.getAllProductionCompany());
-        model.addAttribute("animeCardList", animeService.getAllAnimeSummaryCard());
+        model.addAttribute("animeCardList", animeService.getRecommendAnimeSummaryCards());
 
         return "/index";
     }
