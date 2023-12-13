@@ -1,18 +1,99 @@
 {{>layout/header}}
 {{>layout/navbar}}
-<h1>애니메이션 상세 페이지</h1>
 
-<h2>{{anime.name}}</h2>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- Post content-->
+      <article>
+        <!-- Post header-->
+        <header class="mb-4">
+          <!-- Post title-->
+          <h1 class="fw-bolder mb-1">{{anime.name}}</h1>
+          <!-- Post meta content-->
+          <div class="text-muted fst-italic mb-2">제작사: {{anime.companyName}}</div>
+          <!-- Post categories-->
+          <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
+          <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+        </header>
+        <!-- Preview image figure-->
+        <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
+        <!-- Post content-->
+        <section class="mb-5">
+          <h2>{{score.score}} / 10.0 ({{score.cnt}})</h2>
+          <p class="fs-5 mb-4">{{anime.summary}}</p>
+        </section>
+      </article>
+      <!-- Comments section-->
+      <section class="mb-5">
+        <div class="card bg-light">
+          <div class="card-body">
+            <!-- Comment form-->
+            <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+            <!-- Single comment-->
+            {{#commentList}}
+              <div class="d-flex mb-4">
+                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                <div class="ms-3">
+                  <div class="fw-bold">Commenter Name</div>
+                  {{score}} / {{content}}
+                </div>
+              </div>
+            {{/commentList}}
+            {{^commentList}}
+              <div class="d-flex justify-content-center">
+                <div class="ms-3">
+                  <div class="fw-bold center">
+                    평가가 없습니다. 첫 평가를 남겨주세요!
+                  </div>
+                </div>
+              </div>
+            {{/commentList}}
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- Side widgets-->
+    <div class="col-lg-4">
+      <!-- Search widget-->
+      <div class="card mb-4">
+        <div class="card-header">Search</div>
+        <div class="card-body">
+          <div class="input-group">
+            <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+          </div>
+        </div>
+      </div>
+      <!-- Categories widget-->
+      <div class="card mb-4">
+        <div class="card-header">Categories</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <ul class="list-unstyled mb-0">
+                <li><a href="#!">Web Design</a></li>
+                <li><a href="#!">HTML</a></li>
+                <li><a href="#!">Freebies</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-6">
+              <ul class="list-unstyled mb-0">
+                <li><a href="#!">JavaScript</a></li>
+                <li><a href="#!">CSS</a></li>
+                <li><a href="#!">Tutorials</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Side widget-->
+      <div class="card mb-4">
+        <div class="card-header">Side Widget</div>
+        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h3>{{score.score}}/10</h3>
-<p>평가수: {{score.cnt}}</p>
-
-<p>{{anime.summary}}</p>
-<p>총 {{anime.episodes}}화</p>
-<p>방영일: {{anime.firstBroadcastDate}}</p>
-<p>제작사: <a href="/company/{{anime.companySeq}}">{{anime.companyName}}</a></p>
-
-{{#commentList}}
-  <p>{{content}} ({{score}})</p>
-{{/commentList}}
 {{>layout/footer}}
