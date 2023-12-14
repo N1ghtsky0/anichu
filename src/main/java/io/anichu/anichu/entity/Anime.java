@@ -1,5 +1,6 @@
 package io.anichu.anichu.entity;
 
+import io.anichu.anichu.base.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,7 @@ import org.hibernate.annotations.Comment;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Anime {
+public class Anime extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
