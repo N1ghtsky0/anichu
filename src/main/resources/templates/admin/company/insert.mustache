@@ -1,0 +1,15 @@
+{{>layout/header}}
+{{>layout/admin_navbar}}
+
+<div class="container">
+  <h1 class="my-4">제작사 등록</h1>
+  <form id="frm" action="/admin/company/new" method="post">
+    <div class="form-group mb-4">
+      <label for="name">제작사명</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="최소 한 글자 이상 입력해주세요.">
+    </div>
+    <button type="submit" class="btn btn-primary mb-4">저장</button>
+  </form>
+</div>
+
+{{>layout/footer}}
