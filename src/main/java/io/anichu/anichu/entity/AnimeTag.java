@@ -1,28 +1,32 @@
 package io.anichu.anichu.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.Comment;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Document(collection = "anime_tag")
 public class AnimeTag {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long seq;
+    private String animeName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Anime anime;
+    private Long animeSeq;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Tag tag;
+    private String[] tagArr;
 
-    @Comment("true: 운영자 생성, false: 사용자 생성")
-    @ColumnDefault("false")
-    private Boolean type;
+    public static AnimeTag from(Anime anime, String tags) {
+        return AnimeTag.builder()
+                .animeName(anime.getTitle())
+                .animeSeq(anime.getSeq())
+                .tagArr(tags.split(","))
+                .build();
+    }
 
 }

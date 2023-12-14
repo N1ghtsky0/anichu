@@ -10,7 +10,6 @@ public class GetTagResponseDTO {
 
     public static GetTagResponseDTO from(Tag entity) {
         return GetTagResponseDTO.builder()
-                .seq(entity.getSeq())
                 .tagName(entity.getName())
                 .build();
     }

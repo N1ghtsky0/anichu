@@ -1,7 +1,7 @@
 package io.anichu.anichu.repository;
 
 import io.anichu.anichu.entity.AnimeTag;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface AnimeTagRepo extends JpaRepository<AnimeTag, Long> {
+public interface AnimeTagRepo extends MongoRepository<AnimeTag, Long> {
 }
