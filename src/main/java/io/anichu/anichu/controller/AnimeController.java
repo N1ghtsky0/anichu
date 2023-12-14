@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
+
 @RequiredArgsConstructor
 @RequestMapping("/anime")
 @Controller
@@ -20,8 +22,9 @@ public class AnimeController {
     private final TagService tagService;
 
     @GetMapping()
-    public String animeListPage(Model model) {
-        model.addAttribute("animeCardList", animeService.getAllAnimeSummaryCard());
+    public String animeListPage(@RequestParam HashMap<String, Object> hashMap,
+                                Model model) {
+        model.addAttribute("animeCardList", animeService.searchAnime(hashMap));
 
         return "anime/list";
     }

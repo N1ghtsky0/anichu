@@ -1,5 +1,7 @@
 package io.anichu.anichu.entity;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,20 +13,29 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "anime_tag")
-public class AnimeTag {
+@Document(collection = "anime")
+public class AnimeSearch {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long seq;
+
     private String animeName;
 
     private Long animeSeq;
 
+    private String companyName;
+
+    private Long companySeq;
+
     private String[] tagArr;
 
-    public static AnimeTag from(Anime anime, String tags) {
-        return AnimeTag.builder()
+    public static AnimeSearch from(Anime anime, String tags) {
+        return AnimeSearch.builder()
                 .animeName(anime.getTitle())
                 .animeSeq(anime.getSeq())
+                .companyName(anime.getCompany().getName())
+                .companySeq(anime.getCompany().getSeq())
                 .tagArr(tags.split(","))
                 .build();
     }
