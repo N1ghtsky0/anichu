@@ -2,6 +2,7 @@ package io.anichu.anichu.service.impl;
 
 import io.anichu.anichu.dto.response.GetAnimeResponseDTO;
 import io.anichu.anichu.dto.response.GetAnimeSummaryResponseDTO;
+import io.anichu.anichu.dto.response.PagingDTO;
 import io.anichu.anichu.dto.response.SearchAnimeResponseDTO;
 import io.anichu.anichu.entity.Anime;
 import io.anichu.anichu.entity.AnimeSearch;
@@ -29,6 +30,8 @@ public class AnimeServiceImpl implements AnimeService {
     private final CommentService commentService;
     private final MongoTemplate mongoTemplate;
 
+    private final int CONTENT_IN_ONE_PAGE = 12;
+
     @Override
     public List<SearchAnimeResponseDTO> searchAnime(HashMap<String, Object> hashMap) {
         Query query = new Query();
@@ -41,6 +44,13 @@ public class AnimeServiceImpl implements AnimeService {
         if (hashMap.get("company") != null && !hashMap.get("company").equals("")) {
             String company = hashMap.get("company").toString();
             query.addCriteria(new Criteria("companyName").is(company));
+        }
+
+        if (hashMap.get("page") != null && !hashMap.get("page").equals("")) {
+            long page = Long.parseLong(hashMap.get("page").toString());
+            query.skip(CONTENT_IN_ONE_PAGE * (page - 1)).limit(CONTENT_IN_ONE_PAGE);
+        } else {
+            query.limit(CONTENT_IN_ONE_PAGE);
         }
 
         return mongoTemplate.find(query, AnimeSearch.class).stream()
@@ -74,5 +84,24 @@ public class AnimeServiceImpl implements AnimeService {
     @Transactional(readOnly = true)
     public GetAnimeResponseDTO getAnime(Long seq) {
         return GetAnimeResponseDTO.from(animeRepo.findById(seq).orElseThrow());
+    }
+
+    @Override
+    public PagingDTO paging(HashMap<String, Object> hashMap) {
+        if (hashMap.get("page") == null || hashMap.get("page").equals("")) {
+            return PagingDTO.builder()
+                    .pageNo(1)
+                    .isLast(false)
+                    .build();
+        }
+
+        long totalContents = mongoTemplate.findAll(AnimeSearch.class).size();
+        long totalPages = totalContents / CONTENT_IN_ONE_PAGE;
+        totalPages += (totalContents % CONTENT_IN_ONE_PAGE != 0) ? 1 : 0;
+        return PagingDTO.builder()
+                .totalPage(totalPages)
+                .pageNo(Long.parseLong(hashMap.get("page").toString()))
+                .isLast(Long.parseLong(hashMap.get("page").toString()) + 1 > totalPages)
+                .build();
     }
 }

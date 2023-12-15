@@ -25,6 +25,7 @@ public class AnimeController {
     public String animeListPage(@RequestParam HashMap<String, Object> hashMap,
                                 Model model) {
         model.addAttribute("animeCardList", animeService.searchAnime(hashMap));
+        model.addAttribute("paging", animeService.paging(hashMap));
 
         return "anime/list";
     }
