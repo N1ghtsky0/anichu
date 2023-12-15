@@ -23,7 +23,7 @@ public class Anime extends BaseTimeEntity {
     private String summary;
 
     @Comment("총 회차수")
-    private Integer totalEpisode;
+    private String totalEpisode;
 
     @Comment("첫 방영일")
     private String firstBroadcastDate;

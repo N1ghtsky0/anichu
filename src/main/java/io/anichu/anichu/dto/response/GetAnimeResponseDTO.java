@@ -7,7 +7,7 @@ import lombok.Builder;
 public class GetAnimeResponseDTO {
     private String name;
     private String summary;
-    private Integer episodes;
+    private String episodes;
     private String firstBroadcastDate;
     private String companyName;
     private Long companySeq;
