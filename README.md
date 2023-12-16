@@ -61,6 +61,14 @@ spring:
       hibernate:
         format_sql: true
         show-sql: true
+  data:
+    mongodb:
+      database: #{DATABASE_NAME}
+      host: #{DATABASE_HOST}
+      port: #{DATABASE_PORT}
+      username: #{USER_NAME}
+      password: #{USER_PASSWORD}
+      authentication-database: admin # authentication error 발생 시 필요한 설정
 
 mybatis:
   mapper-locations: classpath:mappers/*.xml
