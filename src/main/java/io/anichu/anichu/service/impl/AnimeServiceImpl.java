@@ -8,6 +8,7 @@ import io.anichu.anichu.entity.Anime;
 import io.anichu.anichu.entity.AnimeSearch;
 import io.anichu.anichu.repository.AnimeRepo;
 import io.anichu.anichu.repository.ProductionCompanyRepo;
+import io.anichu.anichu.repository.mapper.AnimeMapper;
 import io.anichu.anichu.service.AnimeService;
 import io.anichu.anichu.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ import java.util.List;
 public class AnimeServiceImpl implements AnimeService {
     private final AnimeRepo animeRepo;
     private final ProductionCompanyRepo productionCompanyRepo;
+    private final AnimeMapper animeMapper;
     private final CommentService commentService;
     private final MongoTemplate mongoTemplate;
 
@@ -73,11 +75,7 @@ public class AnimeServiceImpl implements AnimeService {
 
     @Override
     public List<GetAnimeSummaryResponseDTO> getRecommendAnimeSummaryCards() {
-        return animeRepo.findAll().stream()
-                .map(anime -> GetAnimeSummaryResponseDTO.from(anime, commentService.getAnimeAverageScore(anime.getSeq())))
-                .sorted(Comparator.comparing(GetAnimeSummaryResponseDTO::getScore).reversed())
-                .limit(10)
-                .toList();
+        return animeMapper.selectTop10Anime();
     }
 
     @Override

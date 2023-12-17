@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.anichu.anichu.repository.mapper.AnimeMapper">
+
+    <select id="selectTop10Anime" resultType="io.anichu.anichu.dto.response.GetAnimeSummaryResponseDTO">
+        select
+            a.seq as seq,
+            a.title as name,
+            (select pc.name from production_company pc where a.company_seq = pc.seq) as companyName,
+            (select truncate(ifnull(avg(c.score), 0), 1) from comment c WHERE c.anime_seq = a.seq and c.deleted = false) as score,
+            (select count(c.seq) from comment c WHERE c.anime_seq = a.seq and c.deleted = false) as commentCnt
+        from anime a
+        order by score desc, commentCnt desc
+        limit 10;
+    </select>
+
+</mapper>
