@@ -4,6 +4,7 @@ import io.anichu.anichu.base.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @NoArgsConstructor
@@ -20,6 +21,7 @@ public class Comment extends BaseTimeEntity {
     @Column(nullable = false)
     private Integer score;
 
+    @ColumnDefault("false")
     private Boolean deleted;
 
     @ManyToOne
