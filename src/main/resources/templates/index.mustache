@@ -14,7 +14,7 @@
   <div class="mb-4 bun-gi-slider">
     <div class="row mb-4">
       <div class="col-10">
-        <h1>OOOO년도 O분기 TOP 10</h1>
+        <h1>{{Top10Quarter.quarter}} TOP 10</h1>
       </div>
       <div class="col-2 mt-auto">
         <div class="row justify-content-evenly arrows">
@@ -28,48 +28,16 @@
       </div>
     </div>
     <div class="mask">
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-          <p>제목 1</p>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-          <p>제목 2</p>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-          <p>제목 3</p>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-          <p>제목 4</p>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-          <p>제목 5</p>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-          <p>제목 6</p>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-          <p>제목 7</p>
-        </a>
-      </div>
+      {{#Top10Quarter.responseDTOList}}
+        <div class="mx-2">
+          <a href="/anime/{{animeSeq}}">
+            <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt={{animeTitle}}/>
+            <p>{{animeTitle}}</p>
+            <p>{{score}}/10.0 ({{evaluationCnt}})</p>
+            <p>{{companyName}}</p>
+          </a>
+        </div>
+      {{/Top10Quarter.responseDTOList}}
     </div>
   </div>
   <div class="mb-4 top10-slider">
@@ -89,41 +57,16 @@
       </div>
     </div>
     <div class="mask">
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
+      {{#Top10All}}
+        <div class="mx-2">
+          <a href="/anime/{{animeSeq}}">
+            <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt={{animeTitle}}/>
+            <p>{{animeTitle}}</p>
+            <p>{{score}}/10.0 ({{evaluationCnt}})</p>
+            <p>{{companyName}}</p>
+          </a>
+        </div>
+      {{/Top10All}}
     </div>
   </div>
   <div class="mb-4 tag-slider1">

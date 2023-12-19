@@ -1,9 +1,6 @@
 package io.anichu.anichu.service.impl;
 
-import io.anichu.anichu.dto.response.GetAnimeResponseDTO;
-import io.anichu.anichu.dto.response.GetAnimeSummaryResponseDTO;
-import io.anichu.anichu.dto.response.PagingDTO;
-import io.anichu.anichu.dto.response.SearchAnimeResponseDTO;
+import io.anichu.anichu.dto.response.*;
 import io.anichu.anichu.entity.Anime;
 import io.anichu.anichu.entity.AnimeSearch;
 import io.anichu.anichu.repository.AnimeRepo;
@@ -74,11 +71,6 @@ public class AnimeServiceImpl implements AnimeService {
     }
 
     @Override
-    public List<GetAnimeSummaryResponseDTO> getRecommendAnimeSummaryCards() {
-        return animeMapper.selectTop10Anime();
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public GetAnimeResponseDTO getAnime(Long seq) {
         return GetAnimeResponseDTO.from(animeRepo.findById(seq).orElseThrow());
@@ -102,4 +94,23 @@ public class AnimeServiceImpl implements AnimeService {
                 .isLast(Long.parseLong(hashMap.get("page").toString()) + 1 > totalPages)
                 .build();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<AnimeCardResponseDTO> getTotalTop10() {
+        return animeMapper.selectTotalTop10().stream()
+                .map(AnimeCardResponseDTO::from)
+                .sorted(Comparator
+                        .comparing(AnimeCardResponseDTO::getScore)
+                        .thenComparing(AnimeCardResponseDTO::getEvaluationCnt).reversed())
+                .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public LatestQuarterTop10ResponseDTO getLatestQuarterTop10() {
+        String quarter = animeMapper.selectLatestQuarter();
+        return LatestQuarterTop10ResponseDTO.from(quarter, animeMapper.selectLatestQuarterTop10(quarter));
+    }
+
 }
