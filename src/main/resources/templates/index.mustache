@@ -1,85 +1,280 @@
 {{>layout/header}}
 {{>layout/navbar}}
+
 <header class="py-5 bg-light border-bottom mb-4">
   <div class="container">
     <div class="text-center my-5">
-      <h1 class="fw-bolder">Welcome to Blog Home!</h1>
-      <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+      <h1 class="fw-bolder">애니 추천은? 애니추!</h1>
+      <p class="lead mb-0">다양한 애니메이션에 대한 평가과 추천을 한번에!</p>
     </div>
   </div>
 </header>
-<!-- Page content-->
+<!-- 이번 분기 TOP 10 -->
 <div class="container">
-  <div class="row">
-    <!-- Blog entries-->
-    <div class="col-lg-8">
-      <!-- Featured blog post-->
-      <div class="card mb-4">
-        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
-        <div class="card-body">
-          <div class="small text-muted">January 1, 2023</div>
-          <h2 class="card-title">Featured Post Title</h2>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-          <a class="btn btn-primary" href="#!">Read more →</a>
+  <div class="mb-4 bun-gi-slider">
+    <div class="row mb-4">
+      <div class="col-10">
+        <h1>OOOO년도 O분기 TOP 10</h1>
+      </div>
+      <div class="col-2 mt-auto">
+        <div class="row justify-content-evenly arrows">
+          <button class="col-4 slick-prev slick-arrow" style="width: auto; height: 40px;">
+            <img src="/static/images/arrow_left.svg" alt="slick prev"/>
+          </button>
+          <button class="col-4 slick-next slick-arrow" style="width: auto; height: 40px;">
+            <img src="/static/images/arrow_right.svg" alt="slick next"/>
+          </button>
         </div>
       </div>
-      <!-- Nested row for non-featured blog posts-->
-      <div class="row">
-        {{#animeCardList}}
-          <div class="col-lg-6">
-            <div class="card mb-4">
-              <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-              <div class="card-body">
-                <div class="small text-muted">{{companyName}}</div>
-                <h2 class="card-title h4">{{name}}</h2>
-                <p class="card-text">{{score}}/10.0 ({{commentCnt}})</p>
-                <a class="btn btn-primary" href="/anime/{{seq}}">리뷰 보러가기 →</a>
-              </div>
-            </div>
-          </div>
-        {{/animeCardList}}
-      </div>
-      <!-- Pagination-->
-      <nav aria-label="Pagination">
-        <hr class="my-0" />
-        <ul class="pagination justify-content-center my-4">
-          <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
-          <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-          <li class="page-item"><a class="page-link" href="#!">2</a></li>
-          <li class="page-item"><a class="page-link" href="#!">3</a></li>
-          <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-          <li class="page-item"><a class="page-link" href="#!">15</a></li>
-          <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-        </ul>
-      </nav>
     </div>
-    <!-- Side widgets-->
-    <div class="col-lg-4">
-      <!-- Search widget-->
-      <div class="card mb-4">
-        <div class="card-header">Search</div>
-        <div class="card-body">
-          <div class="input-group">
-            <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-          </div>
+    <div class="mask">
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+          <p>제목 1</p>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+          <p>제목 2</p>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+          <p>제목 3</p>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+          <p>제목 4</p>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+          <p>제목 5</p>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+          <p>제목 6</p>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+          <p>제목 7</p>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="mb-4 top10-slider">
+    <div class="row mb-4">
+      <div class="col-10">
+        <h1>전체 TOP 10</h1>
+      </div>
+      <div class="col-2 mt-auto">
+        <div class="row justify-content-evenly arrows">
+          <button class="col-4 slick-prev slick-arrow" style="width: auto; height: 40px;">
+            <img src="/static/images/arrow_left.svg" alt="slick prev"/>
+          </button>
+          <button class="col-4 slick-next slick-arrow" style="width: auto; height: 40px;">
+            <img src="/static/images/arrow_right.svg" alt="slick next"/>
+          </button>
         </div>
       </div>
-      <!-- Categories widget-->
-      <div class="card mb-4">
-        <div class="card-header">Categories</div>
-        <div class="card-body">
-          {{#tagList}}
-            <a class="ms-1 mb-1" href="/anime?tag={{tagName}}">#{{tagName}}</a>
-          {{/tagList}}
+    </div>
+    <div class="mask">
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="mb-4 tag-slider1">
+    <div class="row mb-4">
+      <div class="col-10">
+        <h1>#태그명 TOP 10</h1>
+      </div>
+      <div class="col-2 mt-auto">
+        <div class="row justify-content-evenly arrows">
+          <button class="col-4 slick-prev slick-arrow" style="width: auto; height: 40px;">
+            <img src="/static/images/arrow_left.svg" alt="slick prev"/>
+          </button>
+          <button class="col-4 slick-next slick-arrow" style="width: auto; height: 40px;">
+            <img src="/static/images/arrow_right.svg" alt="slick next"/>
+          </button>
         </div>
       </div>
-      <!-- Side widget-->
-      <div class="card mb-4">
-        <div class="card-header">Side Widget</div>
-        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+    </div>
+    <div class="mask">
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="mb-4 tag-slider2">
+    <div class="row mb-4">
+      <div class="col-10">
+        <h1>#태그명 O분기 TOP 10</h1>
+      </div>
+      <div class="col-2 mt-auto">
+        <div class="row justify-content-evenly arrows">
+          <button class="col-4 slick-prev slick-arrow" style="width: auto; height: 40px;">
+            <img src="/static/images/arrow_left.svg" alt="slick prev"/>
+          </button>
+          <button class="col-4 slick-next slick-arrow" style="width: auto; height: 40px;">
+            <img src="/static/images/arrow_right.svg" alt="slick next"/>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="mask">
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
+      </div>
+      <div class="mx-2">
+        <a href="#!">
+          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
+        </a>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    initSlider(".bun-gi-slider");
+    initSlider(".top10-slider");
+    initSlider(".tag-slider1");
+    initSlider(".tag-slider2");
+  });
+
+  function initSlider(target) {
+    $(target + " .mask").slick({
+      slide: 'div',        //슬라이드될 태그
+      infinite : true,     //무한 반복 옵션
+      slidesToShow : 6,        // 한 화면에 보여질 컨텐츠 개수
+      slidesToScroll : 1,        //스크롤 한번에 움직일 컨텐츠 개수
+      speed : 500,     // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+      arrows : true,         // 옆으로 이동하는 화살표 표시 여부
+      dots : false,         // 스크롤바 아래 점으로 페이지네이션 여부
+      autoplay : false,            // 자동 스크롤 사용 여부
+      autoplaySpeed : 2000,         // 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+      pauseOnHover : false,        // 슬라이드 이동   시 마우스 호버하면 슬라이더 정지
+      vertical : false,        // 세로 방향 슬라이드 옵션
+      prevArrow : target + " .slick-prev",
+      nextArrow : target +" .slick-next",
+      draggable : false,     //드래그 가능 여부
+      responsive: [ // 반응형 웹 구현
+        {
+          breakpoint: 960, //화면 사이즈
+          settings: {
+            slidesToShow: 5
+          }
+        },
+        {
+          breakpoint: 768, //화면 사이즈
+          settings: {
+            slidesToShow: 4
+          }
+        }
+      ]
+    });
+  }
+</script>
 {{>layout/footer}}
