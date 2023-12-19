@@ -20,6 +20,7 @@ public class Anime extends BaseTimeEntity {
     private String title;
 
     @Comment("애니메이션 내용 요약")
+    @Column(length = 1000)
     private String summary;
 
     @Comment("총 회차수")
@@ -27,6 +28,9 @@ public class Anime extends BaseTimeEntity {
 
     @Comment("첫 방영일")
     private String firstBroadcastDate;
+
+    @Comment("방영 분기")
+    private String quarter;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ProductionCompany company;
