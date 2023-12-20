@@ -12,8 +12,6 @@ public interface AnimeService {
 
     GetAnimeResponseDTO getAnime(Long seq);
 
-    PagingDTO paging(HashMap<String, Object> hashMap);
-
     List<AnimeCardResponseDTO> getTotalTop10();
 
     LatestQuarterTop10ResponseDTO getLatestQuarterTop10();

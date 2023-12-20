@@ -15,9 +15,6 @@
     </div>
   </section>
 
-  <input type="hidden" name="page" id="page" value={{paging.pageNo}}>
-  <input type="hidden" name="isLast" id="isLast" value={{paging.isLast}}>
-
   <div class="album py-5 bg-body-tertiary">
     <div class="container mb-4">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -37,15 +34,6 @@
         {{/animeCardList}}
       </div>
     </div>
-    <nav aria-label="Pagination">
-      <ul class="pagination justify-content-center my-4">
-        <li class="page-item"><a class="page-link" href="/anime?page=1"><<</a></li>
-        <li class="page-item"><a class="page-link" id="pre_btn"><</a></li>
-        <li class="page-item" aria-current="page"><span class="page-link">{{paging.pageNo}}</span></li>
-        <li class="page-item"><a class="page-link" id="next_btn">></a></li>
-        <li class="page-item"><a class="page-link" href="/anime?page={{paging.totalPage}}">>></a></li>
-      </ul>
-    </nav>
   </div>
 </main>
 <script src="/static/js/anime.js"></script>

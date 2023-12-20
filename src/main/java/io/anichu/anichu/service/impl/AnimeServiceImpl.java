@@ -36,6 +36,7 @@ public class AnimeServiceImpl implements AnimeService {
     private final int CONTENT_IN_ONE_PAGE = 12;
 
     @Override
+    @Transactional(readOnly = true)
     public List<SearchAnimeResponseDTO> searchAnime(HashMap<String, Object> hashMap) {
         Query query = new Query();
 
@@ -85,25 +86,6 @@ public class AnimeServiceImpl implements AnimeService {
     }
 
     @Override
-    public PagingDTO paging(HashMap<String, Object> hashMap) {
-        if (hashMap.get("page") == null || hashMap.get("page").equals("")) {
-            return PagingDTO.builder()
-                    .pageNo(1)
-                    .isLast(false)
-                    .build();
-        }
-
-        long totalContents = mongoTemplate.findAll(AnimeSearch.class).size();
-        long totalPages = totalContents / CONTENT_IN_ONE_PAGE;
-        totalPages += (totalContents % CONTENT_IN_ONE_PAGE != 0) ? 1 : 0;
-        return PagingDTO.builder()
-                .totalPage(totalPages)
-                .pageNo(Long.parseLong(hashMap.get("page").toString()))
-                .isLast(Long.parseLong(hashMap.get("page").toString()) + 1 > totalPages)
-                .build();
-    }
-
-    @Override
     @Transactional(readOnly = true)
     public List<AnimeCardResponseDTO> getTotalTop10() {
         return animeMapper.selectTotalTop10().stream()
@@ -122,6 +104,7 @@ public class AnimeServiceImpl implements AnimeService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public TagTop10ResponseDTO getTagTop10WithOut(String tag) {
         String targetTag;
         List<Tag> tagList = tagRepo.findAllByRecommendIsTrue();
