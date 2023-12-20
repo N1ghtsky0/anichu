@@ -37,8 +37,10 @@
   <hr class="my-0"/>
   <div class="comment-box-wrap my-2">
   </div>
+  <div class="pagination justify-content-center my-4"></div>
 </div>
 
+<script src="/static/js/paging.js"></script>
 <script>
   $(document).ready(function () {
     const pathName = window.location.pathname;
@@ -51,6 +53,7 @@
     })
     .done(function (json) {
       updateCommentWrap(json);
+      initPagination(json.pageable.pageNumber, json.totalPages, json.first, json.last);
     })
     .fail(function (xhr, status, errorThrown) {
       alert("comment error!!!");
