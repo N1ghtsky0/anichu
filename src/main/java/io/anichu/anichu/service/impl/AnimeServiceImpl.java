@@ -3,9 +3,12 @@ package io.anichu.anichu.service.impl;
 import io.anichu.anichu.dto.response.*;
 import io.anichu.anichu.entity.Anime;
 import io.anichu.anichu.entity.AnimeSearch;
+import io.anichu.anichu.entity.Tag;
 import io.anichu.anichu.repository.AnimeRepo;
 import io.anichu.anichu.repository.ProductionCompanyRepo;
+import io.anichu.anichu.repository.TagRepo;
 import io.anichu.anichu.repository.mapper.AnimeMapper;
+import io.anichu.anichu.repository.mapper.AnimeTagMapper;
 import io.anichu.anichu.service.AnimeService;
 import io.anichu.anichu.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -15,17 +18,16 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
 public class AnimeServiceImpl implements AnimeService {
     private final AnimeRepo animeRepo;
+    private final TagRepo tagRepo;
     private final ProductionCompanyRepo productionCompanyRepo;
     private final AnimeMapper animeMapper;
+    private final AnimeTagMapper animeTagMapper;
     private final CommentService commentService;
     private final MongoTemplate mongoTemplate;
 
@@ -111,6 +113,19 @@ public class AnimeServiceImpl implements AnimeService {
     public LatestQuarterTop10ResponseDTO getLatestQuarterTop10() {
         String quarter = animeMapper.selectLatestQuarter();
         return LatestQuarterTop10ResponseDTO.from(quarter, animeMapper.selectLatestQuarterTop10(quarter));
+    }
+
+    @Override
+    public TagTop10ResponseDTO getTagTop10WithOut(String tag) {
+        String targetTag;
+        List<Tag> tagList = tagRepo.findAll();
+
+        do {    //입력된 태그명과 다른 태그가 뽑힐 때까지 반복
+            int randomIndex = new Random().nextInt(tagList.size());
+            targetTag = tagList.get(randomIndex).getName();
+        } while (Objects.equals(tag, targetTag));
+        
+        return TagTop10ResponseDTO.from(targetTag, animeTagMapper.selectTop10ByTag(targetTag));
     }
 
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.anichu.anichu.repository.mapper.AnimeTagMapper">
+
+    <select id="selectTop10ByTag" parameterType="string" resultType="hashmap">
+        SELECT
+            a.seq as animeSeq,
+            a.title as animeTitle,
+            (SELECT AVG(c.score) from comment c WHERE c.anime_seq = a.seq and c.deleted = FALSE) as score,
+            (SELECT COUNT(c.score) from comment c WHERE c.anime_seq = a.seq and c.deleted = FALSE) as evaluationCnt,
+            (SELECT pc.name from production_company pc WHERE pc.seq = a.company_seq) as companyName,
+            a.quarter as quarter
+        from anime a
+        inner join (SELECT a_t.anime_seq as a_seq
+                    FROM anime_tag a_t
+                    WHERE a_t.tag_name = #{value}) a_t2
+           on a.seq = a_t2.a_seq
+        order by score DESC
+        limit 10
+    </select>
+
+</mapper>

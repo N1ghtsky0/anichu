@@ -69,114 +69,68 @@
       {{/Top10All}}
     </div>
   </div>
-  <div class="mb-4 tag-slider1">
-    <div class="row mb-4">
-      <div class="col-10">
-        <h1>#태그명 TOP 10</h1>
-      </div>
-      <div class="col-2 mt-auto">
-        <div class="row justify-content-evenly arrows">
-          <button class="col-4 slick-prev slick-arrow" style="width: auto; height: 40px;">
-            <img src="/static/images/arrow_left.svg" alt="slick prev"/>
-          </button>
-          <button class="col-4 slick-next slick-arrow" style="width: auto; height: 40px;">
-            <img src="/static/images/arrow_right.svg" alt="slick next"/>
-          </button>
+  {{#Top10TagFirst}}
+    <div class="mb-4 tag-slider1">
+      <div class="row mb-4">
+        <div class="col-10">
+          <h1>{{tag}} TOP 10</h1>
+        </div>
+        <div class="col-2 mt-auto">
+          <div class="row justify-content-evenly arrows">
+            <button class="col-4 slick-prev slick-arrow" style="width: auto; height: 40px;">
+              <img src="/static/images/arrow_left.svg" alt="slick prev"/>
+            </button>
+            <button class="col-4 slick-next slick-arrow" style="width: auto; height: 40px;">
+              <img src="/static/images/arrow_right.svg" alt="slick next"/>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="mask">
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
+      <div class="mask">
+        {{#responseDTOList}}
+          <div class="mx-2">
+            <a href="/anime/{{animeSeq}}">
+              <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt={{animeTitle}}/>
+              <p>{{animeTitle}}</p>
+              <p>{{score}}/10.0 ({{evaluationCnt}})</p>
+              <p>{{companyName}}</p>
+            </a>
+          </div>
+        {{/responseDTOList}}
       </div>
     </div>
-  </div>
-  <div class="mb-4 tag-slider2">
-    <div class="row mb-4">
-      <div class="col-10">
-        <h1>#태그명 O분기 TOP 10</h1>
-      </div>
-      <div class="col-2 mt-auto">
-        <div class="row justify-content-evenly arrows">
-          <button class="col-4 slick-prev slick-arrow" style="width: auto; height: 40px;">
-            <img src="/static/images/arrow_left.svg" alt="slick prev"/>
-          </button>
-          <button class="col-4 slick-next slick-arrow" style="width: auto; height: 40px;">
-            <img src="/static/images/arrow_right.svg" alt="slick next"/>
-          </button>
+  {{/Top10TagFirst}}
+  {{#Top10TagSecond}}
+    <div class="mb-4 tag-slider2">
+      <div class="row mb-4">
+        <div class="col-10">
+          <h1>{{tag}} TOP 10</h1>
+        </div>
+        <div class="col-2 mt-auto">
+          <div class="row justify-content-evenly arrows">
+            <button class="col-4 slick-prev slick-arrow" style="width: auto; height: 40px;">
+              <img src="/static/images/arrow_left.svg" alt="slick prev"/>
+            </button>
+            <button class="col-4 slick-next slick-arrow" style="width: auto; height: 40px;">
+              <img src="/static/images/arrow_right.svg" alt="slick next"/>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="mask">
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
-      </div>
-      <div class="mx-2">
-        <a href="#!">
-          <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt="애니 제목"/>
-        </a>
+      <div class="mask">
+        {{#responseDTOList}}
+          <div class="mx-2">
+            <a href="/anime/{{animeSeq}}">
+              <img src="/static/images/no_image.jpg" class="img-fluid img-thumbnail" alt={{animeTitle}}/>
+              <p>{{animeTitle}}</p>
+              <p>{{score}}/10.0 ({{evaluationCnt}})</p>
+              <p>{{companyName}}</p>
+            </a>
+          </div>
+        {{/responseDTOList}}
       </div>
     </div>
-  </div>
+  {{/Top10TagSecond}}
 </div>
 
 <script>

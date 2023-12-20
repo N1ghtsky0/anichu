@@ -17,4 +17,6 @@ public interface AnimeService {
     List<AnimeCardResponseDTO> getTotalTop10();
 
     LatestQuarterTop10ResponseDTO getLatestQuarterTop10();
+
+    TagTop10ResponseDTO getTagTop10WithOut(String tag);
 }
