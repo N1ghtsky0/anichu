@@ -3,6 +3,8 @@ package io.anichu.anichu.dto.response;
 import io.anichu.anichu.entity.Anime;
 import lombok.Builder;
 
+import java.util.List;
+
 @Builder
 public class GetAnimeResponseDTO {
     private String name;
@@ -11,8 +13,9 @@ public class GetAnimeResponseDTO {
     private String firstBroadcastDate;
     private String companyName;
     private Long companySeq;
+    private List<String> tagList;
 
-    public static GetAnimeResponseDTO from(Anime anime) {
+    public static GetAnimeResponseDTO from(Anime anime, List<String> tagList) {
         return GetAnimeResponseDTO.builder()
                 .name(anime.getTitle())
                 .summary(anime.getSummary())
@@ -20,6 +23,7 @@ public class GetAnimeResponseDTO {
                 .firstBroadcastDate(anime.getFirstBroadcastDate())
                 .companyName(anime.getCompany().getName())
                 .companySeq(anime.getCompany().getSeq())
+                .tagList(tagList)
                 .build();
     }
 }

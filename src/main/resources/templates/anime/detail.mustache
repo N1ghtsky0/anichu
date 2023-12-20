@@ -1,98 +1,63 @@
 {{>layout/header}}
 {{>layout/navbar}}
 
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-lg-8">
-      <!-- Post content-->
-      <article>
-        <!-- Post header-->
-        <header class="mb-4">
-          <!-- Post title-->
-          <h1 class="fw-bolder mb-1">{{anime.name}}</h1>
-          <!-- Post meta content-->
-          <div class="text-muted fst-italic mb-2">제작사: {{anime.companyName}}</div>
-          <!-- Post categories-->
-          <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-          <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
-        </header>
-        <!-- Preview image figure-->
-        <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
-        <!-- Post content-->
-        <section class="mb-5">
-          <h2>{{score.score}} / 10.0 ({{score.cnt}})</h2>
-          <p class="fs-5 mb-4">{{anime.summary}}</p>
-        </section>
-      </article>
-      <!-- Comments section-->
-      <section class="mb-5">
-        <div class="card bg-light">
-          <div class="card-body">
-            <!-- Comment form-->
-            <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
-            <!-- Single comment-->
-            {{#commentList}}
-              <div class="d-flex mb-4">
-                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                <div class="ms-3">
-                  <div class="fw-bold">Commenter Name</div>
-                  {{score}} / {{content}}
-                </div>
-              </div>
-            {{/commentList}}
-            {{^commentList}}
-              <div class="d-flex justify-content-center">
-                <div class="ms-3">
-                  <div class="fw-bold center">
-                    평가가 없습니다. 첫 평가를 남겨주세요!
-                  </div>
-                </div>
-              </div>
-            {{/commentList}}
-          </div>
-        </div>
-      </section>
+<div class="container">
+  <div class="row my-2">
+    <div class="col-4">
+      <img src="/static/images/no_image.jpg" alt="anime_title_thumbnail" style="width: 100%; height: auto"/>
+      <p class="text-center">{{score.score}} / 10.0 ({{score.cnt}})</p>
     </div>
-    <!-- Side widgets-->
-    <div class="col-lg-4">
-      <!-- Search widget-->
-      <div class="card mb-4">
-        <div class="card-header">Search</div>
-        <div class="card-body">
-          <div class="input-group">
-            <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-          </div>
-        </div>
-      </div>
-      <!-- Categories widget-->
-      <div class="card mb-4">
-        <div class="card-header">Categories</div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-sm-6">
-              <ul class="list-unstyled mb-0">
-                <li><a href="#!">Web Design</a></li>
-                <li><a href="#!">HTML</a></li>
-                <li><a href="#!">Freebies</a></li>
-              </ul>
-            </div>
-            <div class="col-sm-6">
-              <ul class="list-unstyled mb-0">
-                <li><a href="#!">JavaScript</a></li>
-                <li><a href="#!">CSS</a></li>
-                <li><a href="#!">Tutorials</a></li>
-              </ul>
+    <div class="col-8">
+      <table style="width: 100%; height: 100%;">
+        <colgroup>
+          <col style="width: 10%">
+          <col style="width: 90%">
+        </colgroup>
+        <tr>
+          <td colspan="2"><span style="font-size: xxx-large">{{anime.name}}</span></td>
+        </tr>
+        <tr>
+          <th>제작사</th>
+          <td>{{anime.companyName}}</td>
+        </tr>
+        <tr>
+          <th>줄거리</th>
+          <td>{{anime.summary}}</td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            {{#anime.tagList}}
+              <span>#{{.}}</span>
+            {{/anime.tagList}}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <hr class="my-0"/>
+  <div class="comment-box-wrap my-2">
+    <ul>
+      {{#commentList}}
+        <li>
+          <div class="comment-box">
+            <div class="row justify-content-between">
+              <div class="col-8">
+                <p>{{content}}</p>
+              </div>
+              <div class="col-2">
+                <p>{{score}}</p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- Side widget-->
-      <div class="card mb-4">
-        <div class="card-header">Side Widget</div>
-        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
-      </div>
-    </div>
+          <hr/>
+        </li>
+      {{/commentList}}
+      {{^commentList}}
+        <li>
+          <p>아직 작성된 평가가 없습니다. 첫 평가를 남겨주세요!</p>
+        </li>
+      {{/commentList}}
+    </ul>
   </div>
 </div>
 

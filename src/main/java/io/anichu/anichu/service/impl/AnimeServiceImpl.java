@@ -5,6 +5,7 @@ import io.anichu.anichu.entity.Anime;
 import io.anichu.anichu.entity.AnimeSearch;
 import io.anichu.anichu.entity.Tag;
 import io.anichu.anichu.repository.AnimeRepo;
+import io.anichu.anichu.repository.AnimeTagRepo;
 import io.anichu.anichu.repository.ProductionCompanyRepo;
 import io.anichu.anichu.repository.TagRepo;
 import io.anichu.anichu.repository.mapper.AnimeMapper;
@@ -25,6 +26,7 @@ import java.util.*;
 public class AnimeServiceImpl implements AnimeService {
     private final AnimeRepo animeRepo;
     private final TagRepo tagRepo;
+    private final AnimeTagRepo animeTagRepo;
     private final ProductionCompanyRepo productionCompanyRepo;
     private final AnimeMapper animeMapper;
     private final AnimeTagMapper animeTagMapper;
@@ -75,7 +77,11 @@ public class AnimeServiceImpl implements AnimeService {
     @Override
     @Transactional(readOnly = true)
     public GetAnimeResponseDTO getAnime(Long seq) {
-        return GetAnimeResponseDTO.from(animeRepo.findById(seq).orElseThrow());
+        Anime anime = animeRepo.findById(seq).orElseThrow();
+        List<String> tagList = animeTagRepo.findAllByAnime(anime).stream()
+                .map(animeTag -> animeTag.getTag().getName())
+                .toList();
+        return GetAnimeResponseDTO.from(anime, tagList);
     }
 
     @Override
