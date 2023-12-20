@@ -43,27 +43,14 @@
 <script src="/static/js/paging.js"></script>
 <script>
   $(document).ready(function () {
-    const pathName = window.location.pathname;
-    const animeSeq = pathName.split("/").at(-1);
-
-    $.ajax({
-      url: '/comment?seq=' + animeSeq + '&page=0',
-      method: 'GET',
-      dataType: 'json'
-    })
-    .done(function (json) {
-      updateCommentWrap(json);
-      initPagination(json.pageable.pageNumber, json.totalPages, json.first, json.last);
-    })
-    .fail(function (xhr, status, errorThrown) {
-      alert("comment error!!!");
-    });
+    const animeSeq = window.location.pathname.split("/").at(-1);
+    ajaxPaging('/comment?seq=' + animeSeq, 0, updateCommentWrap, AjaxCommentFailFunc)
   });
 
   function updateCommentWrap(json) {
 
     let result = '';
-    result += '<ul>';
+    result += '<ul style="min-height: 700px">';
 
     for (let comments of json.content) {
       result += '<li>' +
@@ -84,6 +71,10 @@
     result += '</ul>';
 
     $(".comment-box-wrap").html(result);
+  }
+
+  function AjaxCommentFailFunc() {
+    alert("댓글을 불러오는데 실패했습니다.");
   }
 </script>
 
