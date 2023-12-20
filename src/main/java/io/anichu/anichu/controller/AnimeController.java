@@ -35,7 +35,6 @@ public class AnimeController {
                                 Model model) {
         model.addAttribute("anime", animeService.getAnime(seq));
         model.addAttribute("score", commentService.getAnimeAverageScore(seq));
-        model.addAttribute("commentList", commentService.getComments(seq));
 
         return "anime/detail";
     }

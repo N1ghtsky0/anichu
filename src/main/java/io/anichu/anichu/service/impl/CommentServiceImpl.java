@@ -1,17 +1,19 @@
 package io.anichu.anichu.service.impl;
 
 import io.anichu.anichu.dto.response.AnimeAvgScoreDTO;
-import io.anichu.anichu.dto.response.GetCommentsResponseDTO;
+import io.anichu.anichu.entity.Comment;
 import io.anichu.anichu.repository.AnimeRepo;
 import io.anichu.anichu.repository.CommentRepo;
 import io.anichu.anichu.repository.mapper.CommentMapper;
 import io.anichu.anichu.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -27,9 +29,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<GetCommentsResponseDTO> getComments(Long seq) {
-        return commentRepo.findAllByAnimeAndDeletedFalse(animeRepo.findById(seq).orElseThrow()).stream()
-                .map(GetCommentsResponseDTO::from)
-                .toList();
+    public Page<Comment> getComments(Long seq, Pageable pageable) {
+        return commentRepo.findAllByAnimeAndDeletedFalse(animeRepo.findById(seq).orElseThrow(), pageable);
     }
 }

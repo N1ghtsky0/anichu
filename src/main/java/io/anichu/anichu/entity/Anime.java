@@ -32,7 +32,7 @@ public class Anime extends BaseTimeEntity {
     @Comment("방영 분기")
     private String quarter;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ProductionCompany company;
 
 }

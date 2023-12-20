@@ -1,12 +1,12 @@
 package io.anichu.anichu.service;
 
 import io.anichu.anichu.dto.response.AnimeAvgScoreDTO;
-import io.anichu.anichu.dto.response.GetCommentsResponseDTO;
-
-import java.util.List;
+import io.anichu.anichu.entity.Comment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface CommentService {
     AnimeAvgScoreDTO getAnimeAverageScore(Long animeSeq);
 
-    List<GetCommentsResponseDTO> getComments(Long seq);
+    Page<Comment> getComments(Long seq, Pageable pageable);
 }

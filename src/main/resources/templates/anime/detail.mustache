@@ -36,29 +36,52 @@
   </div>
   <hr class="my-0"/>
   <div class="comment-box-wrap my-2">
-    <ul>
-      {{#commentList}}
-        <li>
-          <div class="comment-box">
-            <div class="row justify-content-between">
-              <div class="col-8">
-                <p>{{content}}</p>
-              </div>
-              <div class="col-2">
-                <p>{{score}}</p>
-              </div>
-            </div>
-          </div>
-          <hr/>
-        </li>
-      {{/commentList}}
-      {{^commentList}}
-        <li>
-          <p>아직 작성된 평가가 없습니다. 첫 평가를 남겨주세요!</p>
-        </li>
-      {{/commentList}}
-    </ul>
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    const pathName = window.location.pathname;
+    const animeSeq = pathName.split("/").at(-1);
+
+    $.ajax({
+      url: '/comment?seq=' + animeSeq + '&page=0',
+      method: 'GET',
+      dataType: 'json'
+    })
+    .done(function (json) {
+      updateCommentWrap(json);
+    })
+    .fail(function (xhr, status, errorThrown) {
+      alert("comment error!!!");
+    });
+  });
+
+  function updateCommentWrap(json) {
+
+    let result = '';
+    result += '<ul>';
+
+    for (let comments of json.content) {
+      result += '<li>' +
+          '<div class="comment-box">' +
+          '<div class="row justify-content-between">' +
+          '<div class="col-8">' +
+          '<p>' + comments["content"] + '</p>' +
+          '</div>' +
+          '<div class="col-2">' +
+          '<p>' + comments["score"] + '</p>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '<hr/>' +
+          '</li>';
+    }
+
+    result += '</ul>';
+
+    $(".comment-box-wrap").html(result);
+  }
+</script>
 
 {{>layout/footer}}
