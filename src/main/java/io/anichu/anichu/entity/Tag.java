@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @NoArgsConstructor
@@ -13,5 +14,8 @@ public class Tag extends BaseTimeEntity {
 
     @Id
     private String name;
+
+    @ColumnDefault("false")
+    private Boolean recommend;
 
 }

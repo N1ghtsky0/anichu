@@ -124,7 +124,7 @@ public class AnimeServiceImpl implements AnimeService {
     @Override
     public TagTop10ResponseDTO getTagTop10WithOut(String tag) {
         String targetTag;
-        List<Tag> tagList = tagRepo.findAll();
+        List<Tag> tagList = tagRepo.findAllByRecommendIsTrue();
 
         do {    //입력된 태그명과 다른 태그가 뽑힐 때까지 반복
             int randomIndex = new Random().nextInt(tagList.size());
