@@ -3,11 +3,11 @@
 
 <div class="container">
   <form class="my-2" name="searchForm">
-    <input type="hidden" name="sTag">
-    <input type="hidden" name="sCompany">
-    <input type="hidden" name="sSort">
-    <input type="hidden" name="sKeyword">
-    <input type="hidden" name="page">
+    <input type="hidden" name="sTag" id="sTag">
+    <input type="hidden" name="sCompany" id="sCompany">
+    <input type="hidden" name="sSort" id="sSort">
+    <input type="hidden" name="sKeyword" id="sKeyword">
+    <input type="hidden" name="page" id="page">
 
     <table class="table align-middle" style="width: 100%; height: 100%">
       <colgroup>
@@ -17,11 +17,12 @@
       <tr class="mb-4">
         <th class="form-label">카테고리</th>
         <td>
-          <span class="btn btn-outline-dark btn-sm">태그1</span>
-          <span class="btn btn-outline-dark btn-sm">태그2</span>
-          <span class="btn btn-dark btn-sm">태그3</span>
-          <span class="btn btn-outline-dark btn-sm">태그4</span>
-          <span class="btn btn-dark btn-sm">태그5</span>
+          <span class="btn btn-dark btn-sm tagBtn tagAll">전체</span>
+          <span class="btn btn-outline-dark btn-sm tagBtn">태그1</span>
+          <span class="btn btn-outline-dark btn-sm tagBtn">태그2</span>
+          <span class="btn btn-outline-dark btn-sm tagBtn">태그3</span>
+          <span class="btn btn-outline-dark btn-sm tagBtn">태그4</span>
+          <span class="btn btn-outline-dark btn-sm tagBtn">태그5</span>
         </td>
       </tr>
       <tr class="mb-4">
@@ -113,4 +114,47 @@
   </main>
 </div>
 
+<script>
+  $(".tagBtn").click(function () {
+    let tagArr = [];
+    const selectedTag = $(this).text();
+    if (selectedTag === '전체') {
+      $(".tagBtn").removeClass("btn-dark").addClass("btn-outline-dark");
+      $(this).addClass("btn-dark");
+    } else {
+      $(".tagBtn.tagAll").removeClass("btn-dark").addClass("btn-outline-dark");
+      if ($(this).hasClass("btn-dark")) {
+        $(this).removeClass("btn-dark").addClass("btn-outline-dark");
+      } else {
+        $(this).removeClass("btn-outline-dark").addClass("btn-dark");
+      }
+    }
+
+    $(".tagBtn.btn-dark").each(function (i, e) {
+      if ($(e).text() === "전체") {
+        return true;
+      } else {
+        tagArr.push($(e).val());
+      }
+    });
+
+    if (tagArr.length === 0) {
+      $(".tagBtn.tagAll").removeClass("btn-outline-dark").addClass("btn-dark");
+      $("#sTag").val("");
+    } else {
+      $("#sTag").val(tagArr.join(","));
+    }
+  });
+
+  /** @Param btn {Object}*/
+  function changeBtnClass(btn) {
+    if (btn.hasClass("btn-outline-dark")) {
+      btn.removeClass("btn-outline-dark");
+      btn.addClass("btn-dark");
+    } else {
+      btn.removeClass("btn-dark");
+      btn.addClass("btn-outline-dark");
+    }
+  }
+</script>
 {{>layout/footer}}
