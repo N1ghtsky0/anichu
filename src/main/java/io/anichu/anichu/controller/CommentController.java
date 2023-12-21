@@ -3,6 +3,7 @@ package io.anichu.anichu.controller;
 import io.anichu.anichu.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,7 +21,7 @@ public class CommentController {
     @GetMapping()
     @ResponseBody
     public ResponseEntity<?> getCommentListAPI(@RequestParam("seq") Long seq,
-                                               @PageableDefault(sort = {"createDate"}) Pageable pageable) {
+                                               @PageableDefault(sort = {"createDate"}, direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(commentService.getComments(seq, pageable));
     }
 }
