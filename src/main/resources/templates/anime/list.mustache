@@ -1,40 +1,116 @@
 {{>layout/header}}
 {{>layout/navbar}}
 
-<main>
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Album example</h1>
-        <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Main call to action</a>
-          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-        </p>
-      </div>
-    </div>
-  </section>
+<div class="container">
+  <form class="my-2" name="searchForm">
+    <input type="hidden" name="sTag">
+    <input type="hidden" name="sCompany">
+    <input type="hidden" name="sSort">
+    <input type="hidden" name="sKeyword">
+    <input type="hidden" name="page">
 
-  <div class="album py-5 bg-body-tertiary">
-    <div class="container mb-4">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {{#animeCardList}}
-          <div class="col">
-            <div class="card shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-              <div class="card-body">
-                <p class="card-text">{{animeName}}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <small class="text-body-secondary">{{score}}/10.0 ({{participants}})</small>
-                  <a class="btn btn-primary btn-sm" href="anime/{{animeSeq}}">리뷰 보러가기 →</a>
-                </div>
-              </div>
+    <table class="table align-middle" style="width: 100%; height: 100%">
+      <colgroup>
+        <col style="width: 15%">
+        <col style="width: 85%">
+      </colgroup>
+      <tr class="mb-4">
+        <th class="form-label">카테고리</th>
+        <td>
+          <span class="btn btn-outline-dark btn-sm">태그1</span>
+          <span class="btn btn-outline-dark btn-sm">태그2</span>
+          <span class="btn btn-dark btn-sm">태그3</span>
+          <span class="btn btn-outline-dark btn-sm">태그4</span>
+          <span class="btn btn-dark btn-sm">태그5</span>
+        </td>
+      </tr>
+      <tr class="mb-4">
+        <th>제작사</th>
+        <td>
+          <label>
+            <input class="form-control" type="text" list="list" id="numbers"/>
+          </label>
+          <datalist id ="list">
+            <option value="가나다라"></option>
+            <option value="다라마바"></option>
+            <option value="마바사아"></option>
+            <option value="사아자차"></option>
+            <option value="자차카타"></option>
+            <option value="타파하가"></option>
+          </datalist>
+        </td>
+      </tr>
+      <tr class="mb-4">
+        <th>정렬 기준</th>
+        <td>
+          <div class="row">
+            <div class="col">
+              <label>
+                <input type="radio" name="sortCriteria" value="create_at_desc" checked>
+                최신순
+              </label>
+            </div>
+            <div class="col">
+              <label>
+                <input type="radio" name="sortCriteria" value="create_at_asc">
+                과거순
+              </label>
+            </div>
+            <div class="col">
+              <label>
+                <input type="radio" name="sortCriteria" value="score">
+                점수순
+              </label>
             </div>
           </div>
-        {{/animeCardList}}
-      </div>
+        </td>
+      </tr>
+      <tr class="mb-4">
+        <th>키워드 검색</th>
+        <td>
+          <label>
+            <input class="form-control" type="text" name="searchKeyword">
+          </label>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <main class="my-2">
+    <div class="row anime-list">
+      <a class="col-md-2 mb-3" href="#!" style="max-width: 16%; height: auto">
+        <img  src="/static/images/no_image.jpg" alt="title" style="width: 100%; height: auto"/>
+      </a>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
+      <img class="col-md-2 mb-3" src="/static/images/no_image.jpg" style="max-width: 16%; height: auto" alt="title"/>
     </div>
-  </div>
-</main>
-<script src="/static/js/anime.js"></script>
+
+    <nav aria-label="Pagination">
+      <hr class="my-0" />
+      <ul class="pagination justify-content-center my-4">
+        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
+        <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
+        <li class="page-item"><a class="page-link" href="#!">2</a></li>
+        <li class="page-item"><a class="page-link" href="#!">3</a></li>
+        <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
+        <li class="page-item"><a class="page-link" href="#!">15</a></li>
+        <li class="page-item"><a class="page-link" href="#!">Older</a></li>
+      </ul>
+    </nav>
+  </main>
+</div>
+
 {{>layout/footer}}
