@@ -60,13 +60,6 @@ function initPagination(currentPage, totalPage, isFirst, isLast) {
 
 /** @param page {number} */
 function commentPaging(page) {
-    $(".page-item .active").removeClass("active");
-    $(this).addClass("active");
-    if (page === 0) {
-        $(".first").addClass("disabled");
-    } else {
-        $(".first").removeClass("disabled");
-    }
     const animeSeq = window.location.pathname.split("/").at(-1);
     ajaxPaging('/comment?seq=' + animeSeq, page, updateCommentWrap, AjaxCommentFailFunc);
 }
