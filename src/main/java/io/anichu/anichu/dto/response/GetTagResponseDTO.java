@@ -5,7 +5,6 @@ import lombok.Builder;
 
 @Builder
 public class GetTagResponseDTO {
-    private Long seq;
     private String tagName;
 
     public static GetTagResponseDTO from(Tag entity) {

@@ -2,12 +2,12 @@
 {{>layout/navbar}}
 
 <div class="container">
-  <form class="my-2" name="searchForm">
-    <input type="hidden" name="sTag" id="sTag">
-    <input type="hidden" name="sCompany" id="sCompany">
-    <input type="hidden" name="sSort" id="sSort">
-    <input type="hidden" name="sKeyword" id="sKeyword">
-    <input type="hidden" name="page" id="page">
+  <form class="my-2" name="searchForm" id="searchForm">
+    <input type="hidden" name="sTag" id="sTag" value="">
+    <input type="hidden" name="sCompany" id="sCompany" value="">
+    <input type="hidden" name="sSort" id="sSort" value="">
+    <input type="hidden" name="sKeyword" id="sKeyword" value="">
+    <input type="hidden" name="page" id="page" value="">
 
     <table class="table align-middle" style="width: 100%; height: 100%">
       <colgroup>
@@ -17,27 +17,22 @@
       <tr class="mb-4">
         <th class="form-label">카테고리</th>
         <td>
-          <span class="btn btn-dark btn-sm tagBtn tagAll">전체</span>
-          <span class="btn btn-outline-dark btn-sm tagBtn">태그1</span>
-          <span class="btn btn-outline-dark btn-sm tagBtn">태그2</span>
-          <span class="btn btn-outline-dark btn-sm tagBtn">태그3</span>
-          <span class="btn btn-outline-dark btn-sm tagBtn">태그4</span>
-          <span class="btn btn-outline-dark btn-sm tagBtn">태그5</span>
+          <span class="btn btn-dark btn-sm tagBtn tagAll mb-2">전체</span>
+          {{#tags}}
+            <span class="btn btn-outline-dark btn-sm tagBtn mb-2">{{tagName}}</span>
+          {{/tags}}
         </td>
       </tr>
       <tr class="mb-4">
         <th>제작사</th>
         <td>
           <label>
-            <input class="form-control" type="text" list="list" id="numbers"/>
+            <input class="form-control" type="text" list="list" id="company" name="company"/>
           </label>
           <datalist id ="list">
-            <option value="가나다라"></option>
-            <option value="다라마바"></option>
-            <option value="마바사아"></option>
-            <option value="사아자차"></option>
-            <option value="자차카타"></option>
-            <option value="타파하가"></option>
+            {{#companies}}
+              <option value="{{companyName}}"></option>
+            {{/companies}}
           </datalist>
         </td>
       </tr>
@@ -69,9 +64,16 @@
       <tr class="mb-4">
         <th>키워드 검색</th>
         <td>
-          <label>
-            <input class="form-control" type="text" name="searchKeyword">
-          </label>
+          <div class="row d-flex justify-content-between align-items-center">
+            <div class="col">
+              <label>
+                <input class="form-control" type="text" name="searchKeyword" id="searchKeyword">
+              </label>
+            </div>
+            <div class="col-2">
+              <span class="btn btn-primary searchBtn">검색</span>
+            </div>
+          </div>
         </td>
       </tr>
     </table>
@@ -146,6 +148,18 @@
     }
   });
 
+  $("#company").on("input", function() {
+    $("#sCompany").val($(this).val());
+  });
+
+  $("#searchKeyword").on("input", function() {
+    $("#sKeyword").val($(this).val());
+  });
+
+  $("input[type='radio']").click(function () {
+    $("#sSort").val($(this).val());
+  });
+
   /** @Param btn {Object}*/
   function changeBtnClass(btn) {
     if (btn.hasClass("btn-outline-dark")) {
@@ -156,5 +170,23 @@
       btn.addClass("btn-outline-dark");
     }
   }
+
+  $(".searchBtn").click(function () {
+    const JsonData = $("#searchForm").serialize();
+    console.log(JsonData);
+    $.ajax({
+      url: "/anime/search",
+      type: "POST",
+      contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+      data: JsonData,
+      dataType: "json",
+      success: function (json) {
+          console.log(json)
+      },
+      error: function(xhr, status, error) {
+        alert(error);
+      }
+    });
+  });
 </script>
 {{>layout/footer}}
