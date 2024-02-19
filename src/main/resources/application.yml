@@ -1,1 +1,10 @@
-
+spring:
+  profiles:
+    active: dev
+  mustache:
+    servlet:
+      expose-request-attributes: true
+server:
+  servlet:
+    encoding:
+      force: true
