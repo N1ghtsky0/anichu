@@ -29,6 +29,7 @@ public class Anime extends BaseTimeEntity {
     private String titleKor;
 
     @Comment("애니메이션 줄거리")
+    @Column(length = 1023)
     private String summary;
 
     @Comment("작품 방영 분기")
