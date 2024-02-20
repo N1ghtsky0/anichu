@@ -26,19 +26,32 @@
         </colgroup>
         <tr>
           <th>제목</th>
-          <td>달이 이끄는 이세계 여행</td>
+          <td>{{animeVO.title}}</td>
         </tr>
-        <tr>
-          <th>장르</th>
-          <td>
-            <span>판타지</span>
-            <span>액션</span>
-          </td>
-        </tr>
-        <tr>
-          <th>방영 분기</th>
-          <td>2023년 4분기</td>
-        </tr>
+        {{#animeVO.tags}}
+          <tr>
+            <th>장르</th>
+            <td>{{animeVO.tags}}</td>
+          </tr>
+        {{/animeVO.tags}}
+        {{#animeVO.broadCastDate}}
+          <tr>
+            <th>첫 방영일</th>
+            <td>{{animeVO.broadCastDate}}</td>
+          </tr>
+        {{/animeVO.broadCastDate}}
+        {{#animeVO.quarter}}
+          <tr>
+            <th>방영 분기</th>
+            <td>{{animeVO.quarter}}</td>
+          </tr>
+        {{/animeVO.quarter}}
+        {{#animeVO.totalEpisodes}}
+          <tr>
+            <th>총 회차수</th>
+            <td>{{animeVO.totalEpisodes}}</td>
+          </tr>
+        {{/animeVO.totalEpisodes}}
       </table>
     </div>
   </div>
