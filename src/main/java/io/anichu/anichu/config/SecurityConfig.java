@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private final String[] ALLOWED_URLS = {"/", "/index", "/join", "/login"};
+    private final String[] ALLOWED_URLS = {"/", "/index", "/join", "/login", "/error"};
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request -> request
@@ -34,7 +34,8 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer securityCustomizer() {
         return web -> web.ignoring()
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                .requestMatchers("/upload/i/**");
     }
 
     @Bean

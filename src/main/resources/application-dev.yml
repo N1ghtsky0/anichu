@@ -17,3 +17,5 @@ spring:
   devtools:
     livereload:
       enabled: true
+resource:
+  location: file:///C:/upload/i/
