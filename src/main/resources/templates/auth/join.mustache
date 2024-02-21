@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>애니추</title>
+  {{>common/header}}
+  <style>
+    .hr-sect {
+      display: flex;
+      flex-basis: 100%;
+      align-items: center;
+      color: rgba(0, 0, 0, 0.35);
+      font-size: 16px;
+      margin: 8px 0;
+    }
+    .hr-sect::before,
+    .hr-sect::after {
+      content: "";
+      flex-grow: 1;
+      background: rgba(0, 0, 0, 0.35);
+      height: 1px;
+      font-size: 0;
+      line-height: 0;
+      margin: 0 16px;
+    }
+    .join-icon {
+      max-height: 40px;
+      max-width: 175px;
+    }
+  </style>
+</head>
+<body style="background-color: lightgrey">
+<div class="container p-3">
+  <div class="p-3" style="background-color: white; border-radius: 20px">
+    <form action="/join" method="post">
+      <h2 class="mb-2">회원가입</h2>
+      <hr class="mb-4">
+      <div class="mb-3">
+        <label for="inputEmail" class="form-label">이메일<span style="color: red"> *</span></label>
+        <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="example@email.com">
+      </div>
+      <div class="mb-3">
+        <label for="inputPassword" class="form-label">비밀번호<span style="color: red"> *</span></label>
+        <input type="password" class="form-control" id="inputPassword" name="inputPassword">
+      </div>
+      <div class="mb-3">
+        <label for="passwordCheck" class="form-label">비밀번호 확인<span style="color: red"> *</span></label>
+        <input type="password" class="form-control" id="passwordCheck" name="passwordCheck">
+      </div>
+      <div class="mb-3">
+        <label for="inputNickName" class="form-label">닉네임</label>
+        <input type="text" class="form-control" id="inputNickName" name="inputNickName">
+      </div>
+      <p class="form-text mb-4"><span style="color: red">*</span> 표시는 필수값입니다.</p>
+      <button type="submit" class="btn btn-primary">회원가입</button>
+    </form>
+    <div class="hr-sect mb-4">또는</div>
+    <div class="row d-flex justify-content-evenly">
+      <div class="col-md-10 col-lg-4 mb-3 text-center">
+        <a href="#!">
+          <img src="/images/google_join.svg" class="join-icon order-0" alt="google sign in">
+        </a>
+      </div>
+      <div class="col-md-10 col-lg-4 mb-3 text-center">
+        <a href="#!">
+          <img src="/images/naver_login.png" class="join-icon order-1" alt="naver sign in">
+        </a>
+      </div>
+      <div class="col-md-10 col-lg-4 mb-3 text-center">
+        <a href="#!">
+          <img src="/images/kakao_login.png" class="join-icon order-2" alt="kakao sign in">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{{>common/footer-script}}
+</body>
+</html>
