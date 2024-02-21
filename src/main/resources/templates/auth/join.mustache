@@ -29,18 +29,20 @@
   </style>
 </head>
 <body style="background-color: lightgrey">
+{{>common/navbar}}
 <div class="container p-3">
   <div class="p-3" style="background-color: white; border-radius: 20px">
     <form action="/join" method="post">
+      <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}">
       <h2 class="mb-2">회원가입</h2>
       <hr class="mb-4">
       <div class="mb-3">
         <label for="inputEmail" class="form-label">이메일<span style="color: red"> *</span></label>
-        <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="example@email.com">
+        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="example@email.com" {{#userVO}}value="{{userVO.email}}"{{/userVO}} />
       </div>
       <div class="mb-3">
         <label for="inputPassword" class="form-label">비밀번호<span style="color: red"> *</span></label>
-        <input type="password" class="form-control" id="inputPassword" name="inputPassword">
+        <input type="password" class="form-control" id="inputPassword" name="password">
       </div>
       <div class="mb-3">
         <label for="passwordCheck" class="form-label">비밀번호 확인<span style="color: red"> *</span></label>
@@ -48,7 +50,7 @@
       </div>
       <div class="mb-3">
         <label for="inputNickName" class="form-label">닉네임</label>
-        <input type="text" class="form-control" id="inputNickName" name="inputNickName">
+        <input type="text" class="form-control" id="inputNickName" name="nickName" {{#userVO}}value="{{userVO.nickName}}"{{/userVO}}>
       </div>
       <p class="form-text mb-4"><span style="color: red">*</span> 표시는 필수값입니다.</p>
       <button type="submit" class="btn btn-primary">회원가입</button>
@@ -74,5 +76,12 @@
   </div>
 </div>
 {{>common/footer-script}}
+{{#errorMsg}}
+  <script type="text/javascript">
+    $(document).ready(function () {
+      alert("{{errorMsg}}");
+    });
+  </script>
+{{/errorMsg}}
 </body>
 </html>
