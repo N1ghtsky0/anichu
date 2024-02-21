@@ -13,13 +13,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private final String[] ALLOWED_URLS = {"/", "/index", "/join", "/login", "/logout"};
+    private final String[] ALLOWED_URLS = {"/", "/index", "/join", "/login"};
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request -> request
                 .requestMatchers(ALLOWED_URLS).permitAll()
                 .requestMatchers(HttpMethod.GET, "/anime", "/anime/**").permitAll()
-                .anyRequest().authenticated());
+                .anyRequest().authenticated())
+                .formLogin(config -> config
+                        .loginPage("/login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("/"))
+                .logout(config -> config
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/"));
         return http.build();
     }
 

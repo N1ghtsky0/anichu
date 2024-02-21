@@ -1,6 +1,7 @@
 package io.anichu.anichu.controller;
 
 import io.anichu.anichu.service.AnimeService;
+import io.anichu.anichu.util.CommonController;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-public class AnimeController {
+public class AnimeController extends CommonController {
     private final AnimeService animeService;
 
     @GetMapping("/anime/{name}")

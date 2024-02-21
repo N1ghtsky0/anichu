@@ -32,34 +32,25 @@
 {{>common/navbar}}
 <div class="container p-3">
   <div class="p-3" style="background-color: white; border-radius: 20px">
-    <form action="/join" method="post">
+    <form method="post">
       <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}">
-      <h2 class="mb-2">회원가입</h2>
+      <h2 class="mb-2">로그인</h2>
       <hr class="mb-4">
       <div class="mb-3">
         <label for="inputEmail" class="form-label">이메일<span style="color: red"> *</span></label>
-        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="example@email.com" {{#userVO}}value="{{userVO.email}}"{{/userVO}} />
+        <input type="email" class="form-control" id="inputEmail" name="email" {{#userVO}}value="{{userVO.email}}"{{/userVO}} />
       </div>
       <div class="mb-3">
         <label for="inputPassword" class="form-label">비밀번호<span style="color: red"> *</span></label>
         <input type="password" class="form-control" id="inputPassword" name="password">
       </div>
-      <div class="mb-3">
-        <label for="passwordCheck" class="form-label">비밀번호 확인<span style="color: red"> *</span></label>
-        <input type="password" class="form-control" id="passwordCheck" name="passwordCheck">
-      </div>
-      <div class="mb-3">
-        <label for="inputNickName" class="form-label">닉네임</label>
-        <input type="text" class="form-control" id="inputNickName" name="nickName" {{#userVO}}value="{{userVO.nickName}}"{{/userVO}}>
-      </div>
-      <p class="form-text mb-4"><span style="color: red">*</span> 표시는 필수값입니다.</p>
-      <button type="submit" class="btn btn-primary">회원가입</button>
+      <button type="submit" class="btn btn-primary">로그인</button>
     </form>
     <div class="hr-sect mb-4">또는</div>
     <div class="row d-flex justify-content-evenly">
       <div class="col-md-10 col-lg-4 mb-3 text-center">
         <a href="#!">
-          <img src="/images/google_join.svg" class="join-icon order-0" alt="google sign in">
+          <img src="/images/google_login.svg" class="join-icon order-0" alt="google sign in">
         </a>
       </div>
       <div class="col-md-10 col-lg-4 mb-3 text-center">
@@ -76,12 +67,5 @@
   </div>
 </div>
 {{>common/footer-script}}
-{{#errorMsg}}
-  <script type="text/javascript">
-    $(document).ready(function () {
-      alert("{{errorMsg}}");
-    });
-  </script>
-{{/errorMsg}}
 </body>
 </html>

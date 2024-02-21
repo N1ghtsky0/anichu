@@ -1,6 +1,7 @@
 package io.anichu.anichu.controller;
 
 import io.anichu.anichu.service.UserService;
+import io.anichu.anichu.util.CommonController;
 import io.anichu.anichu.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -10,12 +11,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @RequiredArgsConstructor
 @Controller
-public class UserController {
+public class UserController extends CommonController {
     private final UserService userService;
 
     @GetMapping("/join")
     public String joinPage() {
         return "/auth/join";
+    }
+
+    @GetMapping("/login")
+    public String loginPage() {
+        return "/auth/login";
     }
 
     @PostMapping("/join")
@@ -31,6 +37,7 @@ public class UserController {
             returnPage = "/auth/findAccount";
         } else {
             userService.join(userVO);
+            returnPage = "redirect:/login";
         }
 
         return returnPage;
