@@ -15,6 +15,7 @@ public class AnimeVO {
     private String broadCastDate;
     private String quarter;
     private String totalEpisodes;
+    private FileVO fileVO;
 
     static public AnimeVO convert(Anime entity) {
         return AnimeVO.builder()

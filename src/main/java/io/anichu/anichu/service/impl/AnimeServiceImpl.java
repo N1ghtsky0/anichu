@@ -3,8 +3,10 @@ package io.anichu.anichu.service.impl;
 import io.anichu.anichu.model.middle.AnimeTag;
 import io.anichu.anichu.repository.AnimeRepo;
 import io.anichu.anichu.repository.AnimeTagRepo;
+import io.anichu.anichu.repository.FileRepo;
 import io.anichu.anichu.service.AnimeService;
 import io.anichu.anichu.vo.AnimeVO;
+import io.anichu.anichu.vo.FileVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnimeServiceImpl implements AnimeService {
     private final AnimeRepo animeRepo;
+    private final FileRepo fileRepo;
     private final AnimeTagRepo animeTagRepo;
 
     @Override
@@ -26,6 +29,9 @@ public class AnimeServiceImpl implements AnimeService {
             tagStr.append(", ").append(animeTag.getTag().getName());
         }
         animeVO.setTags(tagStr.substring(2));
+
+        animeVO.setFileVO(FileVO.convert(fileRepo.findByAnimeSeq(animeVO.getSeq()).orElseThrow(
+                () -> new RuntimeException(String.format("{%s} 애니메이션의 썸네일을 찾을 수 없습니다.", title)))));
         return animeVO;
     }
 }
