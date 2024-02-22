@@ -19,3 +19,4 @@ spring:
       enabled: true
 resource:
   location: file:///C:/upload/i/
+  upload: C:/upload/i/
