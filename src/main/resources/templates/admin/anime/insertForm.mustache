@@ -3,40 +3,65 @@
 <head>
   <title>Title</title>
   {{>common/header}}
+  <style>
+    img {
+      max-width: 400px;
+      max-height: 300px;
+    }
+  </style>
 </head>
 <body>
 {{>common/navbar}}
-<form id="frm" class="container p-3" action="/adm/anime/insert" method="post" enctype="multipart/form-data">
+<form id="frm" class="container p-3" method="post" enctype="multipart/form-data">
   <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}">
+  <input type="hidden" id="inputTags" name="tags" />
   <h2 class="mb-4">애니메이션 등록</h2>
   <hr class="my-3">
   <div class="row mb-4">
     <div class="col-12 col-md-6 order-1 mb-3">
       <input type="file" accept="image/*" id="thumbnail" name="thumbnail" onchange="loadFile(this)"/>
       <div class="w-100 h-100 d-flex align-items-center justify-content-center mb-3">
-        <div id="imagePreview"></div>
+        <div id="imagePreview">
+          {{#fileVO}}
+            <img src="{{filePath}}{{fileName}}" alt="{{originName}}" />
+          {{/fileVO}}
+        </div>
       </div>
     </div>
     <div class="col-12 col-md-6 order-2">
       <div class="mb-3">
         <label for="inputTitleOrigin" class="form-label">원제<span style="color: red"> *</span></label>
-        <input type="text" class="form-control" id="inputTitleOrigin" name="titleOrigin" />
+        <input type="text" class="form-control" id="inputTitleOrigin" name="titleOrigin" {{#animeVO}}value="{{titleOrigin}}" {{/animeVO}}/>
       </div>
       <div class="mb-3">
         <label for="inputTitleKor" class="form-label">한글 제목<span style="color: red"> *</span></label>
-        <input type="text" class="form-control" id="inputTitleKor" name="titleKor" />
+        <input type="text" class="form-control" id="inputTitleKor" name="titleKor" {{#animeVO}}value="{{titleKor}}" {{/animeVO}}/>
       </div>
       <div class="mb-3">
         <label for="inputQuarter" class="form-label">방영 분기</label>
-        <input type="text" class="form-control" id="inputQuarter" name="quarter" />
+        <input type="text" class="form-control" id="inputQuarter" name="quarter" {{#animeVO}}value="{{quarter}}" {{/animeVO}}/>
       </div>
       <div class="mb-3">
-        <label for="inputFirstBroadCastDate" class="form-label">첫 방영일</label>
-        <input type="text" class="form-control" id="inputFirstBroadCastDate" name="firstBroadCastDate" />
+        <label for="inputBroadCastDate" class="form-label">첫 방영일</label>
+        <input type="text" class="form-control" id="inputBroadCastDate" name="broadCastDate" {{#animeVO}}value="{{broadCastDate}}" {{/animeVO}}/>
       </div>
       <div class="mb-3">
         <label for="inputTotalEpisodes" class="form-label">총 회차수</label>
-        <input type="text" class="form-control" id="inputTotalEpisodes" name="totalEpisodes" />
+        <input type="text" class="form-control" id="inputTotalEpisodes" name="totalEpisodes" {{#animeVO}}value="{{totalEpisodes}}" {{/animeVO}}/>
+      </div>
+    </div>
+    <div class="col-12 order-3">
+      <div class="mb-3">
+        <p class="form-label">태그</p>
+        <div class="row mb-2">
+          {{#tagList}}
+            {{{.}}}
+          {{/tagList}}
+        </div>
+        <label>
+          <input class="form-control" type="text" id="inputTagText" name="inputTagText" placeholder="추가 태그 입력하기">
+        </label>
+        <p class="form-text">쉼표(,)로 분리해서 작성해주세요.</p>
       </div>
     </div>
   </div>
@@ -47,14 +72,20 @@
 </form>
 {{>common/footer-script}}
 <script>
+  $(".tag-item").click(function () {
+    const target = $(this);
+    if (target.hasClass("btn-outline-secondary")) {
+      target.removeClass("btn-outline-secondary").addClass("btn-secondary");
+    } else {
+      target.removeClass("btn-secondary").addClass("btn-outline-secondary");
+    }
+  });
+
   function loadFile(input) {
     const file = input.files[0];
 
     let newImage = document.createElement("img");
     newImage.src = URL.createObjectURL(file);
-
-    newImage.style.maxHeight = "300px";
-    newImage.style.maxWidth = "400px";
 
     $("#imagePreview").append(newImage);
   }
@@ -64,6 +95,14 @@
   }
 
   function fn_summit() {
+      let action;
+    {{#animeVO}}
+      action = "/adm/anime/update"
+    {{/animeVO}}
+    {{^animeVO}}
+      action = "/adm/anime/insert"
+    {{/animeVO}}
+
     const thumbnail = $("#thumbnail").val();
     const inputTitleOrigin = $("#inputTitleOrigin").val().trim();
     const inputTitleKor = $("#inputTitleKor").val().trim();
@@ -76,9 +115,19 @@
       alert("한글 제목은 필수값입니다.");
     } else {
       if (confirm("저장하시겠습니까?")) {
-        $("#frm").submit();
+        $("#inputTags").val(fn_tagsToString());
+        $("#frm").attr("action", action).submit();
       }
     }
+  }
+
+  function fn_tagsToString() {
+    const tags = $(".btn-secondary.tag-item");
+    let tagStrArr = [];
+    for (const span of tags) {
+      tagStrArr.push(span.innerHTML);
+    }
+    return tagStrArr.join(",") + $("#inputTagText").val();
   }
 </script>
 </body>

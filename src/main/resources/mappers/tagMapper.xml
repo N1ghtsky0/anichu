@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.anichu.anichu.repository.mapper.TagMapper">
+    <select id="selectAllTagsByAnime" parameterType="AnimeVO" resultType="string">
+    <![CDATA[
+        select IF(name in (select tag_name from anime_tag where anime_seq = #{seq}),
+                  concat('<span class="col-auto btn btn-sm btn-secondary ms-1 mb-1 tag-item">', name, '</span>'),
+                  concat('<span class="col-auto btn btn-sm btn-outline-secondary ms-1 mb-1 tag-item">', name, '</span>')) as tags
+        from tag
+        order by name
+    ]]>
+    </select>
+</mapper>

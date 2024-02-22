@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface AnimeRepo extends JpaRepository<Anime, Long> {
     Optional<Anime> findByTitleKor(String title);
+
+    Optional<Anime> findBySeq(Long seq);
 }

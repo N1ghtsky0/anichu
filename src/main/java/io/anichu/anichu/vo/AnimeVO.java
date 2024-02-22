@@ -1,10 +1,10 @@
 package io.anichu.anichu.vo;
 
 import io.anichu.anichu.model.Anime;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Setter
 @Getter
@@ -21,6 +21,7 @@ public class AnimeVO {
     static public AnimeVO convert(Anime entity) {
         return AnimeVO.builder()
                 .seq(entity.getSeq())
+                .titleOrigin(entity.getTitleOrigin())
                 .titleKor(entity.getTitleKor())
                 .broadCastDate(entity.getFirstBroadCastDate())
                 .quarter(entity.getQuarter())

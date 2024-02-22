@@ -3,6 +3,7 @@ package io.anichu.anichu.service.impl;
 import io.anichu.anichu.model.Anime;
 import io.anichu.anichu.repository.FileRepo;
 import io.anichu.anichu.service.FileService;
+import io.anichu.anichu.vo.AnimeVO;
 import io.anichu.anichu.vo.FileVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +34,12 @@ public class FileServiceImpl implements FileService {
                 .fileSize(uploadedFile.getFileSize())
                 .anime(anime)
                 .build());
+    }
+
+    @Override
+    public FileVO getFileByAnime(AnimeVO vo) {
+        return FileVO.convert(fileRepo.findByAnimeSeq(vo.getSeq()).orElseThrow(
+                () -> new RuntimeException(String.format("{%s} 애니메이션의 썸네일을 찾을 수 없습니다.", vo.getTitleKor()))));
     }
 
     private FileVO saveFile(MultipartFile multipartFile) {
