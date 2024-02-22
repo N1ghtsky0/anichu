@@ -13,6 +13,10 @@ public class CommonController {
         if (authentication != null) {
             User user = (User) authentication.getPrincipal();
             model.addAttribute("nickName", user.getNickName());
+
+            if (User.Role.ADMIN.equals(user.getRole())) {
+                model.addAttribute("userAdmin", true);
+            }
         }
     }
 }

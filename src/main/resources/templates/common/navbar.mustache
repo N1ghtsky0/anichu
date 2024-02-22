@@ -5,6 +5,14 @@
       <input class="form-control" type="text" placeholder="Search" aria-label="Search">
     </form>
     <div class="navbar-nav">
+      {{#userAdmin}}
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownAdmin" data-bs-toggle="dropdown" aria-expanded="false">관리자 페이지</a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAdmin">
+            <li><a class="dropdown-item" href="/adm/anime/insert">애니메이션 등록</a></li>
+          </ul>
+        </div>
+      {{/userAdmin}}
       {{#nickName}}
         <div class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdownNavbar" data-bs-toggle="dropdown" aria-expanded="false">{{nickName}}</a>

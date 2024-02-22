@@ -1,5 +1,6 @@
 package io.anichu.anichu.config;
 
+import io.anichu.anichu.model.User;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(request -> request
                 .requestMatchers(ALLOWED_URLS).permitAll()
                 .requestMatchers(HttpMethod.GET, "/anime", "/anime/**").permitAll()
+                .requestMatchers("/adm/**").hasAuthority(User.Role.ADMIN.name())
                 .anyRequest().authenticated())
                 .formLogin(config -> config
                         .loginPage("/login")
