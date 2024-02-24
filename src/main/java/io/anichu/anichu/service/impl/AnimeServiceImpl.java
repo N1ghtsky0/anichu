@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class AnimeServiceImpl implements AnimeService {
@@ -27,13 +29,11 @@ public class AnimeServiceImpl implements AnimeService {
         AnimeVO animeVO = AnimeVO.convert(animeRepo.findByTitleKor(title).orElseThrow(
                 () -> new RuntimeException(String.format("{%s} 애니메이션을 찾을 수 없습니다.", title))));
 
-        //todo 태그들을 문자열로 바꾸는 로직이 해당 매서드에서 필요한지 다시 생각해보기
-        //todo substring 외에 더 깔끔하게 합치는 방법 생각해보기
-        StringBuilder tagStr = new StringBuilder();
-        for (AnimeTag animeTag : animeTagRepo.findByAnimeSeq(animeVO.getSeq())) {
-            tagStr.append(", ").append(animeTag.getTag().getName());
-        }
-        animeVO.setTags(tagStr.substring(2));
+        List<String> tagList = animeTagRepo.findByAnimeSeq(animeVO.getSeq()).stream()
+                .map(animeTag -> animeTag.getTag().getName())
+                .toList();
+        String tagString = String.join(", ", tagList);
+        animeVO.setTags(tagString);
 
         animeVO.setFileVO(fileService.getFileByAnime(animeVO));
         return animeVO;
